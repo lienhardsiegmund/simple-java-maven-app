@@ -1,30 +1,13 @@
-pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:D:\\Users\\lisi1de\\.m2'
-        }
+node {
+    stage('Build') {
+        echo 'Building....'
+        // Create virtualenv
+        sh 'echo "hi"'
     }
-    stages {
-        stage('Build') {
-            steps {
-                bat 'mvn -B -DskipTests clean package'
-            }
-        }
-        stage('Test') {
-            steps {
-                bat 'mvn test'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                bat './jenkins/scripts/deliver.sh'
-            }
-        }
+    stage('Test') {
+        echo 'Building....'
+    }
+    stage('Deploy') {
+        echo 'Deploying....'
     }
 }
