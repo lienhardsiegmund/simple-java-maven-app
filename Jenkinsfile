@@ -3,12 +3,13 @@ pipeline {
         docker {
             image 'bytecodetech/maven-npm' 
             args '-v /root/.m2:/root/.m2'
-            sh npm i java-properties 
+             
         }
     }
     stages {
         stage('Build') {
             steps {
+                sh npm i java-properties
                 sh 'mvn -B -DskipTests clean package'
             }
         }
